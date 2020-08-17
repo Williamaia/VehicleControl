@@ -33,11 +33,12 @@ namespace VehicleControl
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<VehicleControlContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("VehicleControlContext")));
+                options.UseMySql(Configuration.GetConnectionString("VehicleControlContext"), builder =>
+                    builder.MigrationsAssembly("VehicleControl")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
