@@ -1,6 +1,6 @@
 using System;
 
-namespace VehicleControl.Models
+namespace VehicleControl.Models.ViewModels
 {
     public class ErrorViewModel
     {
