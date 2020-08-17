@@ -14,6 +14,8 @@ namespace VehicleControl.Data
         {
         }
 
-        public DbSet<VehicleControl.Models.Marca> Marca { get; set; }
+        public DbSet<Marca> Marca { get; set; }
+        public DbSet<Modelo> Modelo { get; set; }
+        public DbSet<Anuncio> Anuncio { get; set; }
     }
 }
