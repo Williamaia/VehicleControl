@@ -10,22 +10,22 @@ using VehicleControl.Models;
 
 namespace VehicleControl.Controllers
 {
-    public class ModelosController : Controller
+    public class AnunciosController : Controller
     {
         private readonly VehicleControlContext _context;
 
-        public ModelosController(VehicleControlContext context)
+        public AnunciosController(VehicleControlContext context)
         {
             _context = context;
         }
 
-        // GET: Modelos
+        // GET: Anuncios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Modelo.ToListAsync());
+            return View(await _context.Anuncio.ToListAsync());
         }
 
-        // GET: Modelos/Details/5
+        // GET: Anuncios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace VehicleControl.Controllers
                 return NotFound();
             }
 
-            var modelo = await _context.Modelo
+            var anuncio = await _context.Anuncio
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (modelo == null)
+            if (anuncio == null)
             {
                 return NotFound();
             }
 
-            return View(modelo);
+            return View(anuncio);
         }
 
-        // GET: Modelos/Create
+        // GET: Anuncios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Modelos/Create
+        // POST: Anuncios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Detalhe")] Modelo modelo)
+        public async Task<IActionResult> Create([Bind("id,Ano,Valor,Cor,Combustivel,DataVenda,Status")] Anuncio anuncio)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(modelo);
+                _context.Add(anuncio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(modelo);
+            return View(anuncio);
         }
 
-        // GET: Modelos/Edit/5
+        // GET: Anuncios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace VehicleControl.Controllers
                 return NotFound();
             }
 
-            var modelo = await _context.Modelo.FindAsync(id);
-            if (modelo == null)
+            var anuncio = await _context.Anuncio.FindAsync(id);
+            if (anuncio == null)
             {
                 return NotFound();
             }
-            return View(modelo);
+            return View(anuncio);
         }
 
-        // POST: Modelos/Edit/5
+        // POST: Anuncios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Detalhe")] Modelo modelo)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Ano,Valor,Cor,Combustivel,DataVenda,Status")] Anuncio anuncio)
         {
-            if (id != modelo.id)
+            if (id != anuncio.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace VehicleControl.Controllers
             {
                 try
                 {
-                    _context.Update(modelo);
+                    _context.Update(anuncio);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ModeloExists(modelo.id))
+                    if (!AnuncioExists(anuncio.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace VehicleControl.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(modelo);
+            return View(anuncio);
         }
 
-        // GET: Modelos/Delete/5
+        // GET: Anuncios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace VehicleControl.Controllers
                 return NotFound();
             }
 
-            var modelo = await _context.Modelo
+            var anuncio = await _context.Anuncio
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (modelo == null)
+            if (anuncio == null)
             {
                 return NotFound();
             }
 
-            return View(modelo);
+            return View(anuncio);
         }
 
-        // POST: Modelos/Delete/5
+        // POST: Anuncios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var modelo = await _context.Modelo.FindAsync(id);
-            _context.Modelo.Remove(modelo);
+            var anuncio = await _context.Anuncio.FindAsync(id);
+            _context.Anuncio.Remove(anuncio);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ModeloExists(int id)
+        private bool AnuncioExists(int id)
         {
-            return _context.Modelo.Any(e => e.id == id);
+            return _context.Anuncio.Any(e => e.id == id);
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VehicleControl.Data;
+using VehicleControl.Services;
 
 namespace VehicleControl
 {
@@ -34,6 +35,7 @@ namespace VehicleControl
                 options.UseMySql(Configuration.GetConnectionString("VehicleControlContext"), builder =>
                     builder.MigrationsAssembly("VehicleControl")));
 
+            services.AddScoped<ModeloService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
